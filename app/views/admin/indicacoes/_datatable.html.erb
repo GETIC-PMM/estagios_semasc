@@ -1,0 +1,105 @@
+
+
+
+<%- model_class=Indicacao -%>
+
+<% id ||= Time.now.to_i %>
+<% remote ||= remote %>
+<% solicitacao_id ||= solicitacao_id %>
+<% estagiario_id ||= estagiario_id %>
+<% datatable_url ||= datatable_admin_indicacoes_url(solicitacao_id: solicitacao_id, estagiario_id: estagiario_id, remote: remote, format: 'json' ) %>
+<% link_to_new ||= new_admin_indicacao_url(indicacao: {solicitacao_id: solicitacao_id, estagiario_id: estagiario_id}) %>
+
+
+<% if can? :new, Indicacao %>
+    <%= link_to link_to_new, class: 'btn btn-sm border-0 btn-primary float-end mt-4 ms-1' do %>
+        <i class="bi bi-plus"></i> Adicionar </a>
+    <% end %>
+<% end %>
+<table class="table table-responsive" style="width:100%" id="table-indicacoes-<%= id %>">
+    <thead>
+        <tr>
+            <th>#</th>
+                                    
+                    <th><%= model_class.human_attribute_name(:secretaria) %></th>
+
+
+                    <th><%= model_class.human_attribute_name(:curso) %></th>
+                
+                                    
+                    <th><%= model_class.human_attribute_name(:estagiario) %></th>
+
+
+                    <th><%= model_class.human_attribute_name(:ira) %></th>
+                
+                                    
+                    <th><%= model_class.human_attribute_name(:situacao) %></th>
+            <th><%= t("helpers.actions") %></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script type="text/javascript">
+    var table_indicacoes_<%= id %> = $('#table-indicacoes-<%= id %>').DataTable({
+        stateSave: true,
+        responsive: true,
+        order: [
+            [0, "desc"]
+        ],
+        info: true,
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+        },
+        serverSide: true,
+        processing: true,
+        ajax: {
+            url: "<%= datatable_url %>",
+            type: "POST",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            }
+        },
+        columns: [
+            { "data": "index", "class": "col-md-1 coluna-index" },
+                            
+                    { "data": "secretaria" },
+
+
+                    { "data": "curso" },
+                	
+                            
+                    { "data": "estagiario" },
+
+
+                    { "data": "ira" },
+                	
+                            
+                    { "data": "situacao" },
+            { "data": "opcoes", "class": "rowlink-skip coluna-opcoes", "orderable": false }
+        ],
+        initComplete: function() {
+            var api = this.api();
+            
+            // Atrasa a consulta para evitar requisições a cada caracter digitado
+            $(".table-indicacoes").closest("div.table-responsive").find('div.dataTables_filter input').off('keyup.DT input.DT');
+            var searchDelay = null;
+            $(".table-indicacoes").closest("div.table-responsive").find('div.dataTables_filter input').on('keyup', function() {
+                var search = $(".table-indicacoes").closest("div.table-responsive").find('div.dataTables_filter input').val();
+                clearTimeout(searchDelay);
+                searchDelay = setTimeout(function() {
+                    if (search != null) {
+                        api.search(search).draw();
+                    }
+                }, 1000);
+            });
+        }   
+    });
+
+    document.addEventListener("turbolinks:before-cache", function() {
+        if (table_indicacoes_<%= id %> !== null) {
+            table_indicacoes_<%= id %> .destroy();
+            table_indicacoes_<%= id %> = null;
+        }
+    });
+</script>

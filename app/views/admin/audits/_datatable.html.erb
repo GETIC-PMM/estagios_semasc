@@ -1,0 +1,48 @@
+<% audits ||= audits %>
+<% id ||= Time.now.to_i %>
+
+
+<div class="table-responsive">
+	<table class="table table-responsive table-audits-<%= id %>" id="table-audits-<%= id %>">
+		<thead>
+			<tr>
+				<th>#</th>
+                <th>Usuário</th>
+                <th>Tipo</th>
+                <th>Ação</th>
+                <th>Alteração</th>
+                <th>Versão</th>
+                <th>IP</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if audits.present? %>
+                <% audits.try(:each_with_index) do |audit, index| %>
+                    <tr>
+                        <td class="col-md-1"><%= index + 1 %></td>
+                        <td><%= audit.try(:user).try(:nome) %></td>
+                        <td><%= audit.try(:auditable_type) %></td>
+                        <td><%= audit.action == "update" ? "Atualização" : audit.action == "create" ? "Inserção" : "Remoção"  %></td>
+                        <td>
+                            <%= link_to "Visualizar", admin_audit_path(audit.try(:id), auditable_type: audit.try(:auditable_type), auditable_id: audit.try(:auditable_id)), class: "btn btn-sm btn-primary", data: {turbo_frame: "remote_modal"} %>
+                        </td>
+                        <td class="col-md-1"><%= audit.try(:version) %></td>
+                        <td><%= audit.try(:remote_address) %></td>
+                        <td><%= audit.try(:created_at).try(:to_fs) %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<script>
+    $('#table-audits-<%= id %>').DataTable({
+        paging: true,
+        ordering: true,
+        info: true,
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+        }
+    });
+</script>

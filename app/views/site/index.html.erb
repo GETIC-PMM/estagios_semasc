@@ -1,0 +1,142 @@
+<section id="inscricao" class="pt-5">
+    <div class="container">
+        <h2 class="fs-4 text-white text-center mb-5">CREDENCIAMENTO DE ESTAGIÁRIOS EGRESSOS DO JOVEM DO FUTURO | EDITAL Nº 001/2025</h2>
+
+        <!-- form -->
+        <form data-turbo="true" class="d-flex flex-column col-lg-8 col-md-12 offset-lg-2 pb-5 mb-5" id="form-inscricao" action="/estagiarios" accept-charset="UTF-8" method="post" enctype="multipart/form-data" autocomplete="off">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+            <div class="row">
+                <% if @estagiario.errors.present? %>
+                    <div class="col-12 mb-4">
+                        <%= error_messages(@estagiario) %>
+                    </div>
+                <% end %>
+                <div class="col-12 mb-4">
+                    <input type="text" class="form-control" id="estagiario_nome_completo" name="estagiario[nome_completo]" placeholder="Digite seu nome completo" value="<%= @estagiario.nome_completo %>">
+                </div>
+                <div class="col-12 mb-4">
+                    <input type="email" class="form-control" id="estagiario_email" name="estagiario[email]" placeholder="Digite seu email" value="<%= @estagiario.email %>">
+                </div>
+                <div class="col-6 mb-4">
+                    <input type="text" class="form-control" id="estagiario_cpf" name="estagiario[cpf]" placeholder="Digite seu CPF" value="<%= @estagiario.cpf %>">
+                </div>
+                <div class="col-6 mb-4">
+                    <input type="tel" class="form-control" id="estagiario_telefone" name="estagiario[telefone]" placeholder="Digite seu Telefone" value="<%= @estagiario.telefone %>">
+                </div>
+                <div class="col-6 mb-4">
+                    <input type="text" class="form-control" id="estagiario_instituicao_ensino" name="estagiario[instituicao_ensino]" placeholder="Sua Instituição de Ensino" value="<%= @estagiario.instituicao_ensino %>">
+                </div>
+                <div class="col-6 mb-4">
+                    <select class="form-select" id="estagiario_curso_id" name="estagiario[curso_id]">
+                        <option value="">Área/Curso</option>
+                        <% Curso.all.each do |curso| %>
+                          <option <%= @estagiario.curso_id == curso.id ? 'selected' : nil %> value="<%= curso.id %>"><%= curso.nome %></option>
+                        <% end %>
+                        <option value="nil" <%= @estagiario.outro_curso.present? ? 'selected' : nil %>>Outro</option>
+                    </select>
+                    <input type="text" class="form-control mt-2 d-none" id="estagiario_outro_curso" name="estagiario[outro_curso]" placeholder="Digite seu curso" value="<%= @estagiario.outro_curso %>">
+                    <% if @estagiario.outro_curso.present? %>
+                        <script>
+                            console.log("aqui");
+                            $('#estagiario_outro_curso').removeClass('d-none');
+                        </script>
+                    <% end %>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <select class="form-select" id="estagiario_turno" name="estagiario[turno]">
+                        <option value="">Turno de estudo</option>
+                        <option value="manha" <%= @estagiario.turno == "manha" ? 'selected' : nil %>>Manhã</option>
+                        <option value="tarde" <%= @estagiario.turno == "tarde" ? 'selected' : nil %>>Tarde</option>
+                        <option value="noite" <%= @estagiario.turno == "noite" ? 'selected' : nil %>>Noite</option>
+                    </select>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <input type="text" class="form-control" id="estagiario_ano-ingresso" name="estagiario[ano_ingresso]" placeholder="Digite ano de ingresso do programa jovem do futuro" value="<%= @estagiario.ano_ingresso %>">
+                </div>
+
+                <div class="col-6 mb-4">
+
+                    <select multiple="multiple" id="estagiario_horarios_disponiveis" name="estagiario[horarios_disponiveis][]">
+                        <!-- <option value="">Todos</option> -->
+                        <option value="manha" <%= @estagiario.horarios_disponiveis.include?("manha") ? 'selected' : nil %>>Manhã</option>
+                        <option value="tarde" <%= @estagiario.horarios_disponiveis.include?("tarde") ? 'selected' : nil %>>Tarde</option>
+                        <option value="noite" <%= @estagiario.horarios_disponiveis.include?("noite") ? 'selected' : nil %>>Noite</option>
+                    </select>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <p class="text-white">Concluiu outra graduação anteriormente?</p>
+                    <input type="radio" class="btn-check" name="estagiario[possui_graduacao_anterior]" id="estagiario_possui_graduacao_anterior_sim" value="true" <%= @estagiario.possui_graduacao_anterior == true ? 'checked' : nil %>>
+                    <label class="btn btn-outline-info" for="estagiario_possui_graduacao_anterior_sim">Sim</label>
+                    <input type="radio" class="btn-check" name="estagiario[possui_graduacao_anterior]" id="estagiario_possui_graduacao_anterior_nao" value="false" <%= @estagiario.possui_graduacao_anterior == false ? 'checked' : nil %>>
+                    <label class="btn btn-outline-info" for="estagiario_possui_graduacao_anterior_nao">Não</label>
+                </div>
+
+                <div class="col-6 mb-4">
+                    <p class="text-white">Possui alguma deficiência?</p>
+                    <input type="radio" class="btn-check" name="estagiario[possui_deficiencia]" id="estagiario_possui_deficiencia_sim" value="true" <%= @estagiario.possui_deficiencia == true ? 'checked' : nil %>>
+                    <label class="btn btn-outline-info" for="estagiario_possui_deficiencia_sim">Sim</label>
+                    <input type="radio" class="btn-check" name="estagiario[possui_deficiencia]" id="estagiario_possui_deficiencia_nao" value="false" <%= @estagiario.possui_deficiencia == false ? 'checked' : nil %>>
+                    <label class="btn btn-outline-info" for="estagiario_possui_deficiencia_nao">Não</label>
+                </div>
+            </div>
+
+            <section id="instrucoes" class="py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="row">
+                                <div class="col-lg-4 text-center mb-4">
+                                    <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-1.png' %>" alt="">
+
+                                    <div class="input-group mb-3">
+                                        <input type="file" accept="application/pdf" class="form-control" id="estagiario_anexo_documento" name="estagiario[anexo_documento]"  value="<%= @estagiario.anexo_documento %>">
+                                        <label class="input-group-text" for="estagiario_anexo_documento">Carregar</label>
+                                    </div>
+                                    <div class="custom-file-label text-success fw-bold text-break"></div>
+                                    <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
+                                </div>
+                                <div class="col-lg-4 text-center mb-4">
+                                    <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-2.png' %>" alt="">
+
+                                    <div class="input-group mb-3">
+                                        <input type="file" accept="application/pdf" class="form-control" id="estagiario_anexo_comprovante_matricula" name="estagiario[anexo_comprovante_matricula]"  value="<%= @estagiario.anexo_comprovante_matricula %>">
+                                        <label class="input-group-text" for="estagiario_anexo_comprovante_matricula">Carregar</label>
+                                    </div>
+                                    <div class="custom-file-label text-success fw-bold text-break"></div>
+                                    <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
+                                </div>
+                                <div class="col-lg-4 text-center mb-4">
+                                    <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-3.png' %>" alt="">
+
+                                    <div class="input-group mb-3">
+                                        <input type="file" accept="application/pdf" class="form-control" id="estagiario_anexo_curriculo" name="estagiario[anexo_curriculo]"  value="<%= @estagiario.anexo_curriculo %>">
+                                        <label class="input-group-text" for="estagiario_anexo_curriculo">Carregar</label>
+                                    </div>
+                                    <div class="custom-file-label text-success fw-bold text-break"></div>
+                                    <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-11 mb-4 offset-lg-1">
+                            <p class="text-white"><input type="checkbox" class="form-check-input" name="estagiario[declaro_ciencia]" id="estagiario_declaro_ciencia" value="true" <%= @estagiario.declaro_ciencia == true ? 'checked' : nil %>>
+                            Declaro ter ciência das condições previstas no
+                            <a href="http://mossoro.rn.gov.br/userfiles/files/Edital%20de%20Credenciamento%20Est%C3%A1gios%20Mossor%C3%B3%20Estagi%C3%A1rios.pdf" target="_blank">edital</a>
+                            de fluxo continuo para o credenciamento de estagiários.</p>
+                            <p class="text-white"><input type="checkbox" class="form-check-input" name="estagiario[declaro_veracidade]" id="estagiario_declaro_veracidade" value="true" <%= @estagiario.declaro_veracidade == true ? 'checked' : nil %>>
+                            Declaro que as informações prestadas são inteiramente verdadeiras.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="text-center">
+                <div class="d-flex justify-content-around"><%= recaptcha_tags %></div>
+                <br>
+                <button type="submit" class="btn btn-success roboto-bold px-5" style="border-radius: 15px; font-size: 50px;">ENVIAR</button>
+            </div>
+        </form>
+    </div>
+</section>

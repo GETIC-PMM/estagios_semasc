@@ -1,0 +1,80 @@
+<% remote = false if remote == nil %>
+<% id ||= Time.now.to_i %>
+
+<%= form_with(model: [:admin, solicitacao], data: { turbo: remote  }) do |form| %>
+    <%= hidden_field_tag :remote, remote %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.label-required' no label. -->
+    <div class="card-body">
+                    
+                
+                    <% if Usuario.current.admin? %>
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :secretaria_id, class: "form-label"  %>
+                                
+                                    <%= form.collection_select :secretaria_id, Secretaria.all, :id, :nome, {include_blank: "selecione uma secretaria"}, class: "form-select" , style: "width: 100%" %>
+                                
+                            
+                        </div>
+                    <% end %>
+            
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :curso_id, class: "form-label"  %>
+                                
+                                    <%= form.collection_select :curso_id, Curso.all, :id, :nome, {include_blank: "Selecione um curso"}, class: "form-select " , style: "width: 100%" %>
+                                
+                            
+                        </div>
+                
+            
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :perfil, class: "form-label"  %>
+                                
+                                    <%= form.text_area :perfil, class: "form-control" %>
+                                
+                            
+                        </div>
+                
+            
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :quantidade, class: "form-label"  %>
+                                
+                                    <%= form.number_field :quantidade, class: "form-control" %>
+                                
+                            
+                        </div>
+                
+            
+                    
+                    <% if Usuario.current.admin? %>
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :situacao, class: "form-label"  %>
+                                <%= form.select :situacao, enum_options_for_select(Solicitacao, :situacao), {include_blank: false, include_hidden: false}, class: "form-control form-select", style: "width: 100%"  %>                            
+                                
+                            
+                        </div>
+                    <% end %>
+            
+                    
+                
+            
+        
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+       <%= render "admin/solicitacoes/form_actions" %>
+
+        <% unless remote %>
+            <%= link_to "<i class='bi bi-arrow-left'></i> #{t("helpers.links.back")}".html_safe, admin_solicitacoes_path, :class=> "d-inline-block btn btn-dark me-2" %>
+        <% end %>
+    </div>
+<% end %>

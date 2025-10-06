@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      curso:
+        one: Curso
+        other: Cursos
+    attributes:
+      curso:
+        id: Identificador
+        nome: Nome 
+        deleted_at: Data de exclusão
+        created_at: Data de cadastro
+        updated_at: Data de atualização
+        

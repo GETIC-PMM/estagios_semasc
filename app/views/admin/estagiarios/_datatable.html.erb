@@ -1,0 +1,142 @@
+
+
+
+<%- model_class=Estagiario -%>
+
+<% id ||=Time.now.to_i %>
+<% remote ||=remote %>
+<% default_filter ||= default_filter %>
+<% datatable_url ||=datatable_admin_estagiarios_url(remote: remote, format: 'json' ) %>
+<% link_to_new ||=new_admin_estagiario_url() %>
+<% link_to_new_remote ||=new_admin_estagiario_url(remote: true) %>
+
+<% if can? :new, Estagiario %>
+    <%= link_to link_to_new, class: 'btn btn-sm border-0 btn-primary float-end mt-4 ms-1' do %>
+        <i class="bi bi-plus"></i> Adicionar </a>
+    <% end %>
+<% end %>
+<table class="table table-responsive" style="width:100%" id="table-estagiarios-<%= id %>">
+    <thead>
+        <tr>
+            <th>#</th>
+                                
+            <th><%= model_class.human_attribute_name(:nome_completo) %></th>
+        
+                        
+            <th><%= model_class.human_attribute_name(:cpf) %></th>
+        
+                        
+            <th><%= model_class.human_attribute_name(:telefone) %></th>
+        
+                        
+            <th><%= model_class.human_attribute_name(:universidade) %></th>
+        
+                        
+            <th><%= model_class.human_attribute_name(:curso) %></th>
+
+
+            <th><%= model_class.human_attribute_name(:ira) %></th>
+                            
+                        
+            <th><%= model_class.human_attribute_name(:possui_deficiencia) %></th>
+                
+            <th><%= t("helpers.actions") %></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.html5.js"></script>
+<link href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.dataTables.css" rel="stylesheet"> 
+</table>
+<script type="text/javascript">
+    var table_estagiarios_<%= id %> = $('#table-estagiarios-<%= id %>').DataTable({
+        stateSave: true,
+        responsive: true,
+                 layout: {
+          topStart: {
+            buttons: [
+              {
+                extend: 'excel',
+                text: 'Exportar para Excel',
+              }
+            ]
+          }
+        },
+        order: [
+            [0, "desc"]
+        ],
+        info: true,
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+        },
+        serverSide: true,
+        processing: true,
+        ajax: {
+            url: "<%= datatable_url %>",
+            type: "POST",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            }
+        },
+        columns: [
+            { "data": "index", "class": "col-md-1 coluna-index" },
+                            
+            { "data": "nome_completo" },
+            
+                    
+            { "data": "cpf" },
+            
+                    
+            { "data": "telefone" },
+            
+                    
+            { "data": "universidade" },
+            
+                    
+            { "data": "curso" },
+
+
+            { "data": "ira" },
+            
+                    
+            { "data": "possui_deficiencia" },
+                	        
+                    
+            { "data": "opcoes", "class": "rowlink-skip coluna-opcoes", "orderable": false }
+        ],
+        initComplete: function() {
+            var api = this.api();
+            // Atrasa a consulta para evitar requisições a cada caracter digitado
+            $(".table-estagiarios").closest("div.table-responsive").find('div.dataTables_filter input').off('keyup.DT input.DT');
+            var searchDelay = null;
+            $('<select class="form-control select2_basico">'+
+                        '<option value="">Todos os cursos</option>' +
+                    <% Curso.all.each do |curso| %>
+                        '<option value="<%= curso.id %>" <%= default_filter == "#{curso.id}" ? 'selected' : "" %>><%= curso.nome %></option>' +
+                    <% end %>
+                    '<option value="nil">Outros</option>' +
+                '</select>')
+                .prependTo($(' <label class="pt-1"></label> ').prependTo(this.closest('.dataTables_wrapper').find('.dataTables_filter'))).on( 'change', function () {
+                    api.column( 5 ).search( $(this).val() ).draw();
+                } );
+            $(".table-estagiarios").closest("div.table-responsive").find('div.dataTables_filter input').on('keyup', function() {
+                var search = $(".table-estagiarios").closest("div.table-responsive").find('div.dataTables_filter input').val();
+                clearTimeout(searchDelay);
+                searchDelay = setTimeout(function() {
+                    if (search != null) {
+                        api.search(search).draw();
+                    }
+                }, 1000);
+            });
+        }   
+    });
+
+    document.addEventListener("turbolinks:before-cache", function() {
+        if (table_estagiarios_<%= id %> !== null) {
+            table_estagiarios_<%= id %> .destroy();
+            table_estagiarios_<%= id %> = null;
+        }
+    });
+</script>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+
+    <title>Programa de Estágios - Prefeitura de Mossoró</title>
+
+    <link rel="shortcut icon" type="image/png" href="https://prefeiturademossoro.com.br/assets/img/faviconn.png" />
+    <meta property="og:image" content="https://prefeiturademossoro.com.br/assets/img/favicon.jpg">
+
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- main css -->
+    <%= stylesheet_link_tag "site", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag 'site', 'data-turbo-track': 'reload' %>
+
+  </head>
+
+  <body>
+    <main id="content">
+        <!-- partial HEADER -->
+        <header id="header">
+            <div class="topo">
+                <div class="container">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center redes-sociais">
+                            <a class="d-flex align-items-center justify-content-center" href="https://www.instagram.com/prefeiturademossoro/" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                            <a class="d-flex align-items-center justify-content-center" href="https://www.facebook.com/PrefeituraDeMossoro/" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                            <a class="d-flex align-items-center justify-content-center" href="https://twitter.com/PrefMossoro" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a class="d-flex align-items-center justify-content-center" href="https://YouTube.com/PrefeituradeMossoróOficial" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                            <a class="d-flex align-items-center justify-content-center" href="https://Flickr.com/prefeiturademossoro" target="_blank"><i class="fab fa-flickr" aria-hidden="true"></i></a>
+                            <a class="d-flex align-items-center justify-content-center" href="https://linktr.ee/prefeiturademossoro" target="_blank"><i class="fas fa-link" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-end acess">
+                            <button class="btn-accessibility" id="accessibility" onclick="ativarContraste()">
+                                <span class="me-2">Acessibilidade</span>
+                                <img class="me-4" src="https://www.prefeiturademossoro.com.br/assets/img/icon/icon_acessibilidade_branco.svg" alt="">
+                            </button>
+
+                            <span class="me-2">Tamanho da fonte</span>
+
+                            <!-- AUMENTAR FONTE -->
+                            <span id="aumentar-fonte">
+                                <a class="btn" title="Aumentar Fonte" alt="Aumentar" onclick="aumentarZoom()">
+                                    <img src="https://www.prefeiturademossoro.com.br/assets/img/icon/a+_branco.svg" alt="">
+                                </a>
+                            </span>
+                            <svg width="1" height="23" viewBox="0 0 1 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="1" height="23" fill="#fff"></rect>
+                            </svg>
+
+                            <!-- DIMINUIR FONTE -->
+                            <span id="diminuir-fonte">
+                                <a class="btn" title="Diminuir Fonte" alt="Diminuir" onclick="diminuirZoom()">
+                                    <img src="https://www.prefeiturademossoro.com.br/assets/img/icon/a-_branco.svg" alt="">
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div><!-- container -->
+            </div>
+
+        </header>
+
+        <section class="py-5 text-center">
+            <div class="col-md-12">
+                <img class="img-fluid px-5" src="<%= image_path 'site/logo-main.png' %>" alt="">
+            </div>
+        </section>
+
+
+        <%= yield %>
+
+
+        <section id="pre-footer" style="background-color: #00a759;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12" style="background-color: #009851;">
+                        <%= link_to consulta_path, class: 'text-decoration-none' do  %>
+                            <div class="py-5 d-flex align-items-center justify-content-center">
+                                <i class="bi bi-search text-white fs-2 me-3"></i>
+                                <h2 class="fs-5 text-white">Consulte sua inscrição</h2>
+                            </div>
+                        <% end %>
+                    </div>
+                    <div class="col-lg-4 col-md-12" style="background-color: #008748;">
+                        <div class="py-5 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-telephone text-white fs-2 me-3"></i>
+                            <h2 class="fs-5 text-white">(84) 3315.4524</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12" style="background-color: #009851;">
+                        <div class="py-5 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-envelope text-white fs-2 me-3"></i>
+                            <h2 class="fs-5 text-white text-break">estagios@prefeiturademossoro.com.br</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="py-4 bg-white">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-between flex-wrap">
+                        <span class="">©2023 - Todos os direitos reservados. Programa da <a href="https://mossoro.rn.gov.br" class="">Prefeitura de Mossoró</a></span>
+                        <span class="">Desenvolvido por: DIRETI</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <%= render "shared/notificacao" %>
+
+    <!-- bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <%= javascript_include_tag 'bootstrap-multiselect', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- main js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script>
+        // aumentar fontes bootstrap
+        function aumentarFonte() {
+            // get all fonts
+            var elemento = document.getElementById("content");
+            var fonte = window.getComputedStyle(elemento, null).getPropertyValue('font-size');
+            var tamanho = parseFloat(fonte);
+            // elemento.style.fontSize = (tamanho + 1) + 'px';
+            document.body.style.fontSize= (tamanho + 1) + 'px';
+        }
+
+        // diminuir fonte
+        function diminuirFonte() {
+            var elemento = document.getElementById("content");
+            var fonte = window.getComputedStyle(elemento, null).getPropertyValue('font-size');
+            var tamanho = parseFloat(fonte);
+            // elemento.style.fontSize = (tamanho - 1) + 'px';
+            document.body.style.fontSize= (tamanho - 1) + 'px';
+        }
+
+        // aumentar zoom da tela
+        function aumentarZoom() {
+            var elemento = document.getElementById("content");
+            var fonte = window.getComputedStyle(elemento, null).getPropertyValue('zoom');
+            var tamanho = parseFloat(fonte);
+            // elemento.style.zoom = (tamanho + 0.1);
+            document.body.style.zoom= (tamanho + 0.1);
+        }
+
+        // diminuir zoom da tela
+        function diminuirZoom() {
+            var elemento = document.getElementById("content");
+            var fonte = window.getComputedStyle(elemento, null).getPropertyValue('zoom');
+            var tamanho = parseFloat(fonte);
+            // elemento.style.zoom = (tamanho - 0.1);
+            document.body.style.zoom= (tamanho - 0.1);
+        }
+
+        // acessibilidade
+        
+        localStorage.getItem("contraste") === "true" ? ativarContraste() : null;
+
+        function ativarContraste() {
+            const elemento = document.querySelectorAll("body")[0];
+            elemento.classList.toggle("contraste");
+
+            saveConstrasteOnLocalStorage(elemento.classList.contains("contraste"));
+        }
+
+        function saveConstrasteOnLocalStorage(value) {
+            localStorage.setItem("contraste", value);
+        }
+
+
+        (function($) {
+            "use strict";
+
+            $(document).ready(function() {
+                $('#estagiario_horarios_disponiveis').multiselect({
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Selecione os horários disponíveis',
+                });
+            });
+
+            $('#estagiario_anexo_documento, #estagiario_anexo_comprovante_matricula, #estagiario_anexo_curriculo').each(function(){
+              $(this).bind('change', function() {
+
+                // verify it is pdf file
+                var ext = $(this).val().split('.').pop().toLowerCase();
+                if($.inArray(ext, ['pdf']) == -1) {
+                    $(this).val('');
+                    Toastify({
+                        text: "Formato de arquivo inválido. Por favor, selecione um arquivo PDF.",
+                        duration: 5000,
+                        gravity: "bottom",
+                        position: "center",
+                        backgroundColor: "#ff0000",
+                        stopOnFocus: true,
+                    }).showToast();
+                    return false;
+                }
+                var fileName = '';
+                fileName = $(this).val().split('\\').pop();
+                $(this).parent().parent().find('.custom-file-label').html(fileName);
+                // hide .custom-file-label1
+                $(this).parent().parent().find('.custom-file-label1').addClass('d-none');
+                // console.log(fileName);
+              });
+            });
+
+            // if option selected == 'outro' show input
+            $('#estagiario_curso_id').on('change', function() {
+                if (this.value == 'nil') {
+                    $('#estagiario_outro_curso').removeClass('d-none');
+                } else {
+                    $('#estagiario_outro_curso').addClass('d-none');
+                    $('#estagiario_outro_curso').val('');
+                }
+            });
+
+            // tel mask
+            $('#estagiario_telefone').mask('(00) 00000-0000');
+
+            // cep mask
+            // $('#estagiario_cep').mask('00000-000');
+
+            // CPF mask
+            $('#estagiario_cpf').mask('000.000.000-00', {reverse: true});
+
+
+        })(jQuery);
+    </script>
+
+  </body>
+</html>

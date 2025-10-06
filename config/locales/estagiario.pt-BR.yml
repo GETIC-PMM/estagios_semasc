@@ -1,0 +1,42 @@
+pt-BR:
+  activerecord:
+    models:
+      estagiario:
+        one: Estagiário
+        other: Estagiários
+    attributes:
+      estagiario:
+        id: Identificador
+        nome_completo: Nome completo
+        email: E-mail 
+        cpf: CPF 
+        telefone: Telefone
+        curso_id: Curso
+        curso: Curso
+        universidade: Universisade
+        outro_curso: Outro curso
+        turno: Turno 
+        turnos:
+          manha: Manhã
+          tarde: Tarde 
+          noite: Noite 
+        ano_ingresso: Ano
+        ira: IRA 
+        horarios_disponiveis: Hoários disponíveis
+        array_enum:
+          horarios_disponiveis:
+            manha: Manhã
+            tarde: Tarde 
+            noite: Noite
+        possui_graduacao_anterior: Possui graduação anterior
+        possui_deficiencia: Possui alguma deficiência
+        anexo_documento: Documento 
+        anexo_comprovante_matricula: Histórico acadêmico
+        anexo_curriculo: Currículo 
+        declaro_ciencia: Declaração de ciência 
+        declaro_veracidade: Declaração de veracidade dos dados 
+        deleted_at: Data de exclusão
+        created_at: Data de cadastro
+        updated_at: Data de atualização
+        
+        

@@ -1,0 +1,18 @@
+<%%- model_class=<%= singular_table_name.camelize %> -%>
+
+<%% content_for :breadcrumb do %>
+    <li class="breadcrumb-item">
+       <%%= link_to model_class.model_name.human(count: 2).titleize, admin_<%= plural_table_name %>_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><%%= t('helpers.links.list') %></li>
+<%% end %>
+
+
+<section id="list-example" class="sm-hero__section">
+    <h2 class="sm-hero__section-title"><%%= t('helpers.titles.list', :model=> model_class.model_name.human.titleize) %></h2>
+    <div class="card p-3">
+        <div class="card-body p-2">
+            <%%= render 'datatable' %>        
+        </div>
+    </div>
+</section>

@@ -1,0 +1,67 @@
+<% remote = false if remote == nil %>
+<% id ||= Time.now.to_i %>
+
+<%= form_with(model: [:admin, indicacao], data: { turbo: remote  }) do |form| %>
+    <%= hidden_field_tag :remote, remote %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.label-required' no label. -->
+    <div class="card-body">
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :solicitacao_id, class: "form-label"  %>
+                                
+                                    <%= form.collection_select :solicitacao_id, Solicitacao.abertas, :id, :text, {include_blank: "selecione a solicitação"}, class: "form-select" , style: "width: 100%" %>
+                                
+                            
+                        </div>
+                
+            
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :estagiario_id, class: "form-label"  %>
+                                
+                                <%= form.collection_select :estagiario_id, (form.object.estagiario.present? ? [form.object.estagiario] + Estagiario.ordenado : Estagiario.ordenado), :id, :text, {include_blank: "selecione um estagiário"}, class: "form-select" , style: "width: 100%" %>
+                                
+                            
+                        </div>
+                
+            
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :situacao, class: "form-label"  %>
+                                <%= form.select :situacao, enum_options_for_select(Indicacao, :situacao), {include_blank: "seleciona uma situação"}, class: "form-control form-select", style: "width: 100%"  %>                            
+                                
+                            
+                        </div>
+                
+            
+                    
+                
+                        <div class="mb-3 ">
+                            
+                                <%= form.label :observacao, class: "form-label"  %>
+                                
+                                    <%= form.text_area :observacao, class: "form-control" %>
+                                
+                            
+                        </div>
+                
+            
+                    
+                
+            
+        
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+       <%= render "admin/indicacoes/form_actions" %>
+
+        <% unless remote %>
+            <%= link_to "<i class='bi bi-arrow-left'></i> #{t("helpers.links.back")}".html_safe, admin_indicacoes_path, :class=> "d-inline-block btn btn-dark me-2" %>
+        <% end %>
+    </div>
+<% end %>

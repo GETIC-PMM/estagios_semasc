@@ -1,0 +1,36 @@
+pt-BR:
+  activerecord:
+    models:
+      solicitacao:
+        one: Solicitação
+        other: Solicitações
+    attributes:
+      solicitacao:
+        id: Identificador
+        secretaria_id: Secretaria
+        secretaria: Secretaria
+        curso_id: Curso
+        curso: Curso
+        perfil: Perfil 
+        quantidade: Quantidade 
+        situacao: Situação 
+        indicacoes: Indicações
+        deleted_at: Data de exclusão
+        created_at: Data de cadastro
+        updated_at: Data de atualização
+        situacoes:
+          aberta: Aberta
+          encerrada: Encerrada
+    errors:
+      models:
+        solicitacao:
+          attributes:
+            secretaria:
+              required: "não pode ficar em branco"
+            curso:
+              required: "não pode ficar em branco"
+            situacao:
+              required: "não pode ficar em branco"
+
+
+        

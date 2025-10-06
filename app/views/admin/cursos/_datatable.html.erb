@@ -1,0 +1,79 @@
+
+
+
+<%- model_class=Curso -%>
+
+<% id ||=Time.now.to_i %>
+<% remote ||=remote %>
+<% datatable_url ||=datatable_admin_cursos_url(remote: remote, format: 'json' ) %>
+<% link_to_new ||=new_admin_curso_url() %>
+<% link_to_new_remote ||=new_admin_curso_url(remote: true) %>
+
+<% if can? :new, Curso %>
+    <%= link_to link_to_new, class: 'btn btn-sm border-0 btn-primary float-end mt-4 ms-1' do %>
+        <i class="bi bi-plus"></i> Adicionar </a>
+    <% end %>
+<% end %>
+<table class="table table-responsive" style="width:100%" id="table-cursos-<%= id %>">
+    <thead>
+        <tr>
+            <th>#</th>
+                                
+            <th><%= model_class.human_attribute_name(:nome) %></th>
+                
+            <th><%= t("helpers.actions") %></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script type="text/javascript">
+    var table_cursos_<%= id %> = $('#table-cursos-<%= id %>').DataTable({
+        stateSave: true,
+        responsive: true,
+        order: [
+            [0, "desc"]
+        ],
+        info: true,
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+        },
+        serverSide: true,
+        processing: true,
+        ajax: {
+            url: "<%= datatable_url %>",
+            type: "POST",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            }
+        },
+        columns: [
+            { "data": "index", "class": "col-md-1 coluna-index" },
+                            
+            { "data": "nome" },
+                	
+            { "data": "opcoes", "class": "rowlink-skip coluna-opcoes", "orderable": false }
+        ],
+        initComplete: function() {
+            var api = this.api();
+            // Atrasa a consulta para evitar requisições a cada caracter digitado
+            $(".table-cursos").closest("div.table-responsive").find('div.dataTables_filter input').off('keyup.DT input.DT');
+            var searchDelay = null;
+            $(".table-cursos").closest("div.table-responsive").find('div.dataTables_filter input').on('keyup', function() {
+                var search = $(".table-cursos").closest("div.table-responsive").find('div.dataTables_filter input').val();
+                clearTimeout(searchDelay);
+                searchDelay = setTimeout(function() {
+                    if (search != null) {
+                        api.search(search).draw();
+                    }
+                }, 1000);
+            });
+        }   
+    });
+
+    document.addEventListener("turbolinks:before-cache", function() {
+        if (table_cursos_<%= id %> !== null) {
+            table_cursos_<%= id %> .destroy();
+            table_cursos_<%= id %> = null;
+        }
+    });
+</script>

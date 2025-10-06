@@ -1,0 +1,79 @@
+<%- model_class = Estagiario -%>
+
+<% resource ||= resource %>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+        
+      <dt><strong><%= model_class.human_attribute_name(:nome_completo) %> :</strong></dt>
+      <dd><%= resource.try(:nome_completo) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:email) %> :</strong></dt>
+      <dd><%= resource.try(:email) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:cpf) %> :</strong></dt>
+      <dd><%= resource.try(:cpf) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:telefone) %> :</strong></dt>
+      <dd><%= resource.try(:telefone) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:universidade) %> :</strong></dt>
+      <dd><%= resource.try(:universidade) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:curso) %> :</strong></dt>
+      <dd><%= resource.try(:curso).try(:nome) %></dd>
+
+      <dt><strong><%= model_class.human_attribute_name(:outro_curso) %> :</strong></dt>
+      <dd><%= resource.try(:outro_curso) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:turno) %> :</strong></dt>
+      <dd><%= enum_i18n(Estagiario, :turno, resource.try(:turno)) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:ano_ingresso) %> :</strong></dt>
+      <dd><%= resource.try(:ano_ingresso) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:ira) %> :</strong></dt>
+      <dd><%= resource.try(:ira) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:horarios_disponiveis) %> :</strong></dt>
+      <dd><%= array_enum_i18n(resource, :horarios_disponiveis) %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:possui_graduacao_anterior) %> :</strong></dt>
+      <dd><%= resource.try(:possui_graduacao_anterior) ? 'Sim' : 'Não' %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:possui_deficiencia) %> :</strong></dt>
+      <dd><%= resource.try(:possui_deficiencia) ? 'Sim' : 'Não' %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:anexo_documento) %> :</strong></dt>
+      <dd><%= link_to "Documento", resource.try(:anexo_documento).try(:url), target: '_blank' %></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:anexo_comprovante_matricula) %> :</strong></dt>
+      <dd><%= link_to "Comprovante de Matrícula", resource.try(:anexo_comprovante_matricula).try(:url), target: '_blank'%></dd>
+    
+          
+      <dt><strong><%= model_class.human_attribute_name(:anexo_curriculo) %> :</strong></dt>
+      <dd><%= link_to "Currículo", resource.try(:anexo_curriculo).try(:url), target: '_blank' %></dd>
+            
+    </dl>
+  </div>
+  <div class="col-md-12 mb-4">
+    <%= render partial: "admin/indicacoes/table", locals: {estagiario_id: resource.id, remote: true, show_collapse: 'show'} %>
+  </div>
+  <div class="col-md-12">
+    <%= render partial: "admin/audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
+  </div>
+</div>

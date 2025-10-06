@@ -1,0 +1,36 @@
+pt-BR:
+  activerecord:
+    models:
+      indicacao:
+        one: Indicação
+        other: Indicaçães
+    attributes:
+      indicacao:
+        id: Identificador
+        solicitacao_id: Solicitação
+        solicitacao: Solicitação
+        secretaria_id: Secretaria
+        secretaria: Secretaria
+        curso_id: Curso
+        curso: Curso
+        estagiario_id: Estagiário
+        estagiario: Estagiário
+        situacao: Situação 
+        observacao: Observação 
+        deleted_at: Data de exclusão
+        created_at: Data de cadastro
+        updated_at: Data de atualização
+        situacoes:
+          em_aberto: Em aberto
+          selecionado: Selecionado
+          nao_selecionado: Não selecionado
+    errors:
+      models:
+        indicacao:
+          attributes:
+            solicitacao:
+              required: "não pode ficar em branco"
+            estagiario:
+              required: "não pode ficar em branco"
+
+        

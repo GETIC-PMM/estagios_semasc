@@ -1,0 +1,201 @@
+<% remote = false if remote == nil %>
+<% id ||= Time.now.to_i %>
+
+
+<%= form_for([:admin, @estagiario], data: { turbo: remote  }) do |form| %>
+    <%= hidden_field_tag :remote, remote %>
+    <!-- Note: Para adicionar campo obrigatório é só adicionar a classe '.label-required' no label. -->
+    <div class="card-body">
+                    
+                
+        <div class="mb-3 ">
+            
+                <%= form.label :nome_completo, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :nome_completo, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :email, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :email, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :cpf, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :cpf, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :telefone, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :telefone, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :universidade, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :universidade, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :curso_id, class: "form-label"  %>
+                
+                <%= form.collection_select :curso_id, Curso.all, :id, :nome, {include_blank: "selecione um curso", include_hidden: false}, class: "form-control form-select " , style: "width: 100%" %>
+                
+            
+        </div>
+
+        <div class="mb-3 ">
+            
+                <%= form.label :outro_curso, class: "form-label"  %>
+                
+                    <%= form.text_field :outro_curso, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :turno, class: "form-label label-required"  %>
+                <%= form.select :turno, enum_options_for_select(Estagiario, :turno), {include_blank: "selecione uma turno"}, class: "form-control form-select  ", style: "width: 100%"  %>
+                
+    
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :ano_ingresso, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :ano_ingresso, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :ira, class: "form-label label-required"  %>
+                
+                    <%= form.text_field :ira, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+            <%= form.label :horarios_disponiveis, class: "form-label label-required"  %>
+            <%= form.select :horarios_disponiveis, array_enum_options_for_select(Estagiario, :horarios_disponiveis), {include_blank: false, include_hidden: false}, class: "form-control form-select ", multiple: "multiple", style: "width: 100%" %>
+                
+        </div>
+
+
+    
+
+        <div class="mb-3 form-check">
+            
+                <%= form.check_box :possui_graduacao_anterior, class: "form-check-input label-required" %>
+                <%= form.label :possui_graduacao_anterior, class: "form-check-label"   %>
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 form-check">
+            
+                <%= form.check_box :possui_deficiencia, class: "form-check-input label-required" %>
+                <%= form.label :possui_deficiencia, class: "form-check-label"   %>
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+                <%= form.label :anexo_documento, class: "form-label label-required"  %>
+                
+                    <%= form.file_field :anexo_documento, class: "form-control" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :anexo_comprovante_matricula, class: "form-label label-required"  %>
+                
+                    <%= form.file_field :anexo_comprovante_matricula, class: "form-control label-required" %>
+                
+            
+        </div>
+
+
+    
+
+        <div class="mb-3 ">
+            
+                <%= form.label :anexo_curriculo, class: "form-label"  %>
+                
+                    <%= form.file_field :anexo_curriculo, class: "form-control label-required" %>
+                
+            
+        </div>
+                
+            
+                    
+                
+            
+        
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+        <%= render "admin/estagiarios/form_actions" %>
+        <% unless remote %>
+            <%= link_to "<i class='bi bi-arrow-left'></i> #{t("helpers.links.back")}".html_safe, admin_estagiarios_path, :class=> "d-inline-block btn btn-dark me-2" %>
+        <% end %>
+    </div>
+<% end %>

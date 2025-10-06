@@ -1,0 +1,88 @@
+<div id="sub-header" class="bg-info">
+    <div class="container py-4 mb-5">
+        <h1 class="fs-2 text-white">Consultar Inscrição</h1>
+    </div>
+</div>
+
+<div id="page-content" class="mb-5">
+    <div class="container">
+        <div class="card bg-light p-4 rounded">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <form id="consulta-estagiario" class="mb-4" data-turbo="true"  action="/consultar" accept-charset="UTF-8" method="post" autocomplete="off">
+                            <div class="row">
+                                <% if @errors.present? %>
+                                    <div id="error_messages" class="col-12 mb-4">
+                                        <div class="alert alert-danger alert-dismissible fade show">
+                                            <div class="d-flex flex-column">
+                                                <span>
+                                                    <ul> 
+                                                        <% @errors.each do |msg| %>
+                                                            <li><%= msg %></li> 
+                                                        <% end %>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        setTimeout(function(){
+                                            $('html, body').animate({
+                                                scrollTop: $("#error_messages").offset().top - 100
+                                            }, 1000);
+                                        }, 2000);
+                                    </script>
+                                <% end %>
+
+                                <div class="col-md-12 col-sm-12 mb-3">
+                                    <input type="text" class="form-control form-control-lg" id="consult-cpf" name="cpf" placeholder="Digite seu CPF">
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 ">
+                                    <%= recaptcha_tags %>
+                                    <button type="submit" class="btn btn-lg w-100 btn-primary mt-3">Consultar</button>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 ">
+                                    <%= link_to "Voltar", root_path, class: 'btn btn-lg w-100 btn-dark mt-3' %>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <% if @estagiario.present? %>
+                          <div id="result" class="fs-4">
+                              <p class="mb-0">Nome: <span id="insc-nome" class="color-primary fw-bold"><%= @estagiario.nome_completo %></span></p>
+                              <p class="mb-0">CPF: <span id="insc-cpf" class="color-primary fw-bold"><%= @estagiario.cpf %></span></p>
+                              <p class="mb-0">Situação: <span id="insc-situacao" class="color-primary fw-bold">Inscrição Realizada</span></p>
+                          </div>
+                            <%= form_with(model: @estagiario, url: update_curriculo_path(@estagiario), method: :patch, local: false, remote: true) do |form| %>
+                              <div class="field d-flex flex-column mt-3">
+                                <%= form.label :anexo_curriculo, "Atualizar Curriculo" %>
+                                <%= form.file_field :anexo_curriculo, id: 'anexo-curriculo' %>
+                              </div>
+                              <div class="actions">
+                                <%= form.submit "Atualizar", class: "btn btn-lg w-25 btn-primary mt-3" %>
+                              </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    $('#consult-cpf').mask('000.000.000-00', {reverse: true});
+</script>

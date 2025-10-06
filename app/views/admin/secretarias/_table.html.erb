@@ -1,0 +1,20 @@
+<%- model_class=Secretaria -%>
+
+
+
+
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Secretaria" aria-expanded="true" aria-controls="Secretaria">
+        <%= model_class.model_name.human(count: 2).titleize %>
+      </button>
+    </h2>
+    <div id="Secretaria" class="accordion-collapse collapse <%= show_collapse %>" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <%= render partial: "admin/secretarias/datatable" , locals: {remote: remote} %>
+      </div>
+    </div>
+  </div>
+</div>

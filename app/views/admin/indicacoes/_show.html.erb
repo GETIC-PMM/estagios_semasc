@@ -1,0 +1,35 @@
+<%- model_class = Indicacao -%>
+
+<% resource ||= resource %>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+        
+          <dt><strong><%= model_class.human_attribute_name(:secretaria) %> :</strong></dt>
+          <dd><%= resource.try(:secretaria).try(:nome) %></dd>
+
+          
+          <dt><strong><%= model_class.human_attribute_name(:curso) %> :</strong></dt>
+          <dd><%= resource.try(:curso).try(:nome) %></dd>
+        
+              
+          <dt><strong><%= model_class.human_attribute_name(:estagiario) %> :</strong></dt>
+          <dd><%= link_to resource.try(:estagiario).try(:nome_completo), admin_estagiario_path(resource.estagiario), target: "_blank" %></dd>
+        
+              
+          <dt><strong><%= model_class.human_attribute_name(:situacao) %> :</strong></dt>
+          <dd><%= resource.try(:situacao) %></dd>
+        
+              
+          <dt><strong><%= model_class.human_attribute_name(:observacao) %> :</strong></dt>
+          <dd><%= resource.try(:observacao) %></dd>
+        
+              
+      
+    </dl>
+  </div>
+  <div class="col-md-12">
+    <%= render partial: "admin/audits/table", locals: {audits: resource.try(:own_and_associated_audits), show_collapse: 'show'} %>
+  </div>
+</div>

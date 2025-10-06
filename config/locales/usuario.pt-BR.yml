@@ -1,0 +1,23 @@
+pt-BR:
+  activerecord:
+    models:
+      usuario:
+        one: Usuário
+        other: Usuários
+    attributes:
+      usuario:
+        id: Identificador
+        nome: Nome 
+        permissao: Permissão 
+        secretaria_id: Secretaria
+        secretaria: Secretaria
+        email: E-mail 
+        password: Senha 
+        password_confirmation: Confirmar senha
+        current_password: Senha Atual 
+        deleted_at: Data de exclusão
+        created_at: Data de cadastro
+        updated_at: Data de atualização
+        permissoes: 
+          admin: Administrador 
+          solicitador: Solicitador

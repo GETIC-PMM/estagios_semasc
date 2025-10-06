@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* constants */
+.roboto {
+    font-family: 'Roboto', serif;
+    font-weight: 400;
+}
+.roboto-bold {
+    font-family: 'Roboto', serif;
+    font-weight: 700;
+}
+.monsterrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+.monsterrat-bold {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.line-height-1 {
+    line-height: 1em;
+}
+.color-primary {color: #003985 !important;}
+.color-secondary {color: #ffba00 !important;}
+.primary-accent {color: #00fff6 !important;}
+.bg-primary {background-color: #003985 !important;}
+.bg-secondary {background-color: #ffba00 !important;}
+.fs-80 {
+    font-size: 80px;
+}
+
+#publico-alvo {
+    background-color: #ffba00;
+}
+/* init site */
+
+/* header */
+.topo {
+    background: #009640;
+    padding: 5px 0px;
+}
+.topo .redes-sociais a {
+    display: table;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+.topo .redes-sociais a:hover {
+    background: #023E84;
+}
+.topo .redes-sociais a svg{
+    font-size: 16px;
+    color: #009640;
+}
+.topo .acess span {
+    color: #fff;
+}
+.btn-accessibility {
+    background: transparent;
+    border: none;
+}
+/* fix .topo on top */
+.topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+body {
+    padding-top: 47px;
+}
+
+/* navbar toggler svg */
+.navbar-toggler svg {
+    color: #fff;
+    font-size: 30px;
+}
+
+.navbar-toggler {
+    color: rgba(255,255,255,.55);
+    border-color: rgba(255,255,255,.1);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+#content {
+    background: #013d86 url('<%= image_path "site/bg-main-banner.jpg" %>') no-repeat center center;
+    /* min-height: 100vh; */
+}
+
+/* main nav */
+.navbar .nav-item .nav-link:hover{
+    color: #ffba00 !important;
+}
+
+#publico-alvo ul li{
+    border-radius: 20px;
+    line-height: 1em;
+}
+
+#plus-icon {
+    position: absolute;
+    right: 0;
+    top: -135px;
+    width: 170px;
+}
+
+
+#main-banner {
+    background: #013d86 url('<%= image_path "site/bg-main-banner.jpg" %>') no-repeat center top;
+    background-size: 100% 100%;
+}
+
+/* form inscricao */
+#form-inscricao .btn-group{
+    width: 100%;
+}
+.multiselect-container {
+    width: 100%;
+    padding: 5px;
+}
+.multiselect-container li a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+.multiselect-container li a label{
+    display: block;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+#form-inscricao input[type="text"], #form-inscricao input[type="email"], #form-inscricao input[type="tel"], #form-inscricao select,
+#form-inscricao .multiselect
+{
+    text-align: left;
+    display: block;
+    /* background: #fff; */
+    color: #024287;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    padding: 15px 10px 15px 15px;
+    width: 100%;
+    border-radius: 15px;
+}
+
+#form-inscricao .multiselect {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+}
+
+/* type file custom */
+.custom-file-input{
+    padding: 5px !important;
+}
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Anexar Documento';
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #024287;
+    border-radius: 12px;
+    padding: 9px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    color: #024287;
+}
+
+#form-inscricao select {
+    padding-right: 40px;
+    font-weight: bold;
+}
+
+
+/* media lg */
+@media (max-width: 1200px) {
+    .fs-80{
+        font-size: 3rem !important;
+    }
+    #main-banner h2{
+        font-size: 2rem !important;
+    }
+}
+
+/* media md */
+@media (max-width: 768px) {
+    .fs-80{
+        font-size: 3rem !important;
+    }
+    #form-inscricao .col,
+    #form-inscricao .col-1, 
+    #form-inscricao .col-2, 
+    #form-inscricao .col-3, 
+    #form-inscricao .col-4, 
+    #form-inscricao .col-5, 
+    #form-inscricao .col-6, 
+    #form-inscricao .col-7, 
+    #form-inscricao .col-8, 
+    #form-inscricao .col-9, 
+    #form-inscricao .col-10, 
+    #form-inscricao .col-11, 
+    #form-inscricao .col-12 {
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* media sm */
+@media (max-width: 576px) {
+    .fs-80{
+        font-size: 2rem !important;
+    }
+}
+
+
+/* acessibilidade */
+/*constraste*/
+.contraste,
+.contraste nav,
+.contraste div:not(.item),
+.contraste li,
+.contraste ol,
+.contraste header,
+.contraste footer,
+.contraste section,
+.contraste main,
+.contraste aside,
+.contraste article {
+    background: black !important;
+    color: white !important;
+}
+
+.contraste h1,
+.contraste h2,
+.contraste h3,
+.contraste h4,
+.contraste h5,
+.contraste h6,
+.contraste p,
+.contraste label,
+.contraste strong,
+.contraste em,
+.contraste cite,
+.contraste q,
+.contraste i,
+.contraste b,
+.contraste u,
+.contraste span {
+    color: white !important;
+}
+
+.contraste a,
+.contraste a span {
+    color: yellow !important;
+}
+
+.contraste button,
+.contraste input[type=button],
+.contraste input[type=reset],
+.contraste input[type=submit] {
+    background: black !important;
+    color: yellow !important;
+    border: none !important;
+}
+
+.contraste #featured-links-section .col a,
+.contraste .btn-pmmblue {
+    background: black !important;
+    color: yellow !important;
+    border: 1px solid yellow !important;
+}
+
+.contraste .active.custom-border:after,
+.contraste .vaccine-divider {
+    background: yellow !important;
+}
+
+/* .contraste img {filter: contrast(100%) brightness(0%) invert(100%);} */
+.contraste #featured-links-section img {
+    filter: none !important;
+}
+
+.contraste #pmm-navbar ul li a img {
+    filter: contrast(500%) invert(100%);
+}
+
+/* periodo eleitoral */
+
+/*.img-fluid.px-5 {
+    display: none !important;
+}*/
