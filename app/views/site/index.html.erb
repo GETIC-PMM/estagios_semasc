@@ -118,6 +118,16 @@
                                     <div class="custom-file-label text-success fw-bold text-break"></div>
                                     <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
                                 </div>
+                                <div class="col-lg-4 text-center mb-4">
+                                    <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-4.svg' %>" alt="">
+
+                                    <div class="input-group mb-3">
+                                        <input type="file" accept="application/pdf" class="form-control" id="estagiario_anexo_certificado" name="estagiario[anexo_certificado]"  value="<%= @estagiario.anexo_certificado %>">
+                                        <label class="input-group-text" for="estagiario_anexo_certificado">Carregar</label>
+                                    </div>
+                                    <div class="custom-file-label text-success fw-bold text-break"></div>
+                                    <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-11 mb-4 offset-lg-1">

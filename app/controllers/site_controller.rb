@@ -72,8 +72,7 @@ class SiteController < ActionController::Base
                 :nome_completo, 
                 :email, 
                 :cpf, 
-                :telefone, 
-                :universidade, 
+                :telefone,
                 :curso_id, 
                 :outro_curso,
                 :turno, 
@@ -82,9 +81,11 @@ class SiteController < ActionController::Base
                 :possui_graduacao_anterior, 
                 :possui_deficiencia, 
                 :anexo_documento, 
-                :anexo_comprovante_matricula, 
+                :anexo_comprovante_matricula,
+                :anexo_certificado,
                 :anexo_curriculo,
                 :declaro_ciencia,
+                :instituicao_ensino,
                 :declaro_veracidade,
                 horarios_disponiveis: []
             )

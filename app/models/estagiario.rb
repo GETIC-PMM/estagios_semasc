@@ -20,6 +20,7 @@ class Estagiario < ApplicationRecord
     mount_uploader :anexo_documento, DocumentoUploader
     mount_uploader :anexo_curriculo, DocumentoUploader
     mount_uploader :anexo_comprovante_matricula, DocumentoUploader
+    mount_uploader :anexo_certificado, DocumentoUploader
     # has_one_attached :anexo_documento
     # has_one_attached :anexo_curriculo
     # has_one_attached :anexo_comprovante_matricula
@@ -45,7 +46,7 @@ class Estagiario < ApplicationRecord
     }
     
     # validations ...............................................................
-    validates :nome_completo, :email, :cpf, :telefone, :universidade, :turno, :ano_ingresso, :ira, 
+    validates :nome_completo, :email, :cpf, :telefone, :turno, :ano_ingresso, 
         :horarios_disponiveis, :anexo_documento, :anexo_curriculo,
         :anexo_comprovante_matricula, :declaro_ciencia, :declaro_veracidade, presence: true, on: :create
     validates :possui_graduacao_anterior, inclusion: [true, false], on: :create

@@ -99,8 +99,7 @@ class Admin::EstagiariosController < AdminController
                     :nome_completo, 
                     :email, 
                     :cpf, 
-                    :telefone, 
-                    :universidade, 
+                    :telefone,
                     :curso_id, 
                     :outro_curso,
                     :turno, 
@@ -111,7 +110,8 @@ class Admin::EstagiariosController < AdminController
                     :possui_deficiencia, 
                     :anexo_documento, 
                     :anexo_comprovante_matricula, 
-                    :anexo_curriculo 
+                    :anexo_curriculo,
+                    :anexo_certificado
                 )
             end
         end
