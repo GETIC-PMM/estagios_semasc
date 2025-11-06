@@ -88,7 +88,7 @@
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1">
                             <div class="row">
-                                <div class="col-lg-4 text-center mb-4">
+                                <div class="col-lg-3 text-center mb-3">
                                     <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-1.png' %>" alt="">
 
                                     <div class="input-group mb-3">
@@ -98,7 +98,7 @@
                                     <div class="custom-file-label text-success fw-bold text-break"></div>
                                     <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
                                 </div>
-                                <div class="col-lg-4 text-center mb-4">
+                                <div class="col-lg-3 text-center mb-3">
                                     <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-2.png' %>" alt="">
 
                                     <div class="input-group mb-3">
@@ -108,7 +108,7 @@
                                     <div class="custom-file-label text-success fw-bold text-break"></div>
                                     <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
                                 </div>
-                                <div class="col-lg-4 text-center mb-4">
+                                <div class="col-lg-3 text-center mb-3">
                                     <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-3.png' %>" alt="">
 
                                     <div class="input-group mb-3">
@@ -118,7 +118,7 @@
                                     <div class="custom-file-label text-success fw-bold text-break"></div>
                                     <div class="custom-file-label1 text-danger fw-bold text-break">* Apenas arquivos PDF</div>
                                 </div>
-                                <div class="col-lg-4 text-center mb-4">
+                                <div class="col-lg-3 text-center mb-3">
                                     <img class="img-fluid mb-2" style="width: 160px" src="<%= image_path 'site/img-footer-4.svg' %>" alt="">
 
                                     <div class="input-group mb-3">
@@ -132,11 +132,11 @@
                         </div>
                         <div class="col-11 mb-4 offset-lg-1">
                             <p class="text-white"><input type="checkbox" class="form-check-input" name="estagiario[declaro_ciencia]" id="estagiario_declaro_ciencia" value="true" <%= @estagiario.declaro_ciencia == true ? 'checked' : nil %>>
-                            Declaro ter ciência das condições previstas no
-                            <a href="http://mossoro.rn.gov.br/userfiles/files/Edital%20de%20Credenciamento%20Est%C3%A1gios%20Mossor%C3%B3%20Estagi%C3%A1rios.pdf" target="_blank">edital</a>
-                            de fluxo continuo para o credenciamento de estagiários.</p>
-                            <p class="text-white"><input type="checkbox" class="form-check-input" name="estagiario[declaro_veracidade]" id="estagiario_declaro_veracidade" value="true" <%= @estagiario.declaro_veracidade == true ? 'checked' : nil %>>
-                            Declaro que as informações prestadas são inteiramente verdadeiras.</p>
+                                Declaro ter ciência das condições previstas no
+                                <a href="/documentos/edital.pdf" target="_blank">edital</a>
+                                de fluxo continuo para o credenciamento de estagiários.</p>
+                                <p class="text-white"><input type="checkbox" class="form-check-input" name="estagiario[declaro_veracidade]" id="estagiario_declaro_veracidade" value="true" <%= @estagiario.declaro_veracidade == true ? 'checked' : nil %>>
+                                Declaro que as informações prestadas são inteiramente verdadeiras.</p>
                         </div>
                     </div>
                 </div>
