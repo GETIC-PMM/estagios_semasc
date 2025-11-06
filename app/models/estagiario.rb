@@ -47,7 +47,7 @@ class Estagiario < ApplicationRecord
     
     # validations ...............................................................
     validates :nome_completo, :email, :cpf, :telefone, :turno, :ano_ingresso, 
-        :horarios_disponiveis, :anexo_documento, :anexo_curriculo,
+        :horarios_disponiveis, :anexo_documento, :anexo_curriculo, :anexo_certificado,
         :anexo_comprovante_matricula, :declaro_ciencia, :declaro_veracidade, presence: true, on: :create
     validates :possui_graduacao_anterior, inclusion: [true, false], on: :create
     validates :possui_deficiencia, inclusion: [true, false], on: :create
